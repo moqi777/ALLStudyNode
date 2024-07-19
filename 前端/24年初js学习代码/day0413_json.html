@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let fun1 = () =>{
+            let js1 = {
+                "name":"小明",
+                "age":18,
+                "sno":1
+            }
+            console.log(js1.name,js1.age,js1.sno);//直接访问json中的属性
+            //增加属性
+            js1.sex = "男";
+            js1["birthday"] = "2004-04-13";
+            console.log(js1);
+        }
+        let fun2 = () =>{
+            //json数组
+            let arr = [
+                {"sno":1,"name":"张三","age":18},
+                {"sno":2,"name":"李四","age":19},
+                {"sno":3,"name":"王五","age":25},
+            ]
+            arr.forEach(js => {
+                console.log(js);
+            })
+            //把json数组转成string
+            str = JSON.stringify(arr);
+            console.log(typeof(str),str);
+            //把字符串转为json对象
+            jsObj = JSON.parse(str);
+            console.log(typeof(jsObj));
+            jsObj.forEach(js => {
+                console.log(js);
+            })
+        }
+
+        fun1();
+        fun2();
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //九九乘法表
+        for(var i=1;i<=9;i++){
+            for(var j=i;j<=9;j++){
+                document.writeln(i+"*"+j+"="+i*j+"&nbsp;&nbsp;&nbsp;");
+            }
+            document.writeln("<br/>");
+        }
+        /*
+        数组：采用线性结构存储的一系列有关联的数据
+
+        js中创建数组的方式有2种
+        */
+       //1   使用Array构造函数
+       var colors=new Array(3);
+       var colors=new Array(1,2,3,6,7);
+       /*
+        小括号：数组中预先保留的项目数量
+       */
+      //2   数组字面量表示法
+       var ary = [3,4,7,"中国"];
+       document.writeln(ary)
+       //数组的访问需要借助数组索引，也叫下标
+        document.writeln(ary[3]);//读取
+        ary[3] = "美国";
+        document.writeln("<br/>");
+        document.writeln(ary);
+
+        //数组的遍历
+        //array.length
+        for(var i=0;i<ary.length;i++){
+            document.writeln(ary[i]);
+        }
+
+        //定义一个10个元素数组数组，使用循环给数组赋值，0-100之间的随机数
+        //Math.random() 0-1
+        var num = parseInt(Math.random()*101);
+        document.writeln(num);
+
+        var arra = new Array(10);
+        for(var i=0;i<arra.length;i++){
+            arra[i] = parseInt(Math.random()*101);
+        }
+        document.writeln(arra);
+    </script>
+</body>
+</html>

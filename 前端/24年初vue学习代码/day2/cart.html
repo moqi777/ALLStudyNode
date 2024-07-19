@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue3.245.js"></script>
+    <style>
+        table{
+            outline: solid 1px black;
+            border-collapse: collapse;
+        }
+        td{
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" style="width: 600px;margin: auto;">
+        <table width="600">
+            <caption>购物车</caption>
+            <tr>
+                <td><input type="checkbox" v-model="checked" @change="selectAll"></td>  
+                <td>商品ID</td>
+                <td>商品名称</td>
+                <td>单价</td>
+                <td>购买数量</td>
+                <td>总价</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="item in carList">
+                <td><input type="checkbox" v-model="item.checked"></td>
+                <td>{{item.id}}</td>    
+                <td>{{item.name}}</td>
+                <td>
+                    <span style="color: red;font-weight: bold;">￥</span>
+                    {{item.price}}
+                </td>
+                <td>
+                    <button @click="item.count--" :disabled="item.count < 1">-</button>
+                        {{item.count}}
+                    <button @click="item.count++" :disabled="item.count >= 9">+</button>
+                </td>
+                <td>{{item.price * item.count}}</td>
+                <td><button @click="deleteItem(item)">删除</button></td>
+            </tr>
+            <tr>
+                <td colspan="5" align="right">总价</td>
+                <td colspan="2">
+                    <span style="color: red;font-weight: bold;">￥</span>
+                    {{money}}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const app = {
+            data(){
+                return{
+                    carList:[
+                        {id:1,checked:false,name:"联想笔记本",price:10,count:1},
+                        {id:2,checked:false,name:"金士顿U盘",price:20,count:1},
+                        {id:3,checked:false,name:"鼠标",price:30,count:1},
+                        {id:4,checked:false,name:"华为手机",price:40,count:1},
+                        {id:5,checked:false,name:"牛肉",price:50,count:1},
+                        {id:6,checked:false,name:"充电器",price:60,count:1},
+                        {id:7,checked:false,name:"烧水壶",price:10,count:1}
+                    ],
+                    checked:false
+                }
+            },
+            methods:{
+                selectAll(){
+                    this.carList.forEach(item =>{
+                        item.checked = this.checked;
+                    })
+                },
+                deleteItem(item){
+                    const index = this.carList.indexOf(item);
+                    if(index !== -1){
+                        this.carList.splice(index,1);//删除对应商品
+                    }
+                }
+            },
+            computed:{  //计算属性声明区
+                money:{ //money是计算属性的名字
+                    get:function(){
+                        let sum = 0;
+                        this.carList.forEach(va =>{ 
+                            if(va.checked){
+                                sum += va.price * va.count
+                            }
+                        })
+                        return sum;
+                    }
+                }
+            }
+        }
+        const vue = Vue.createApp(app);
+        vue.mount("#app");
+    </script>
+</body>
+</html>

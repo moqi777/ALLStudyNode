@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        判断类型：boolean
+        true 真
+        false 假
+        如果今天下雨，就页面输出，我们待在教室敲代码
+        如果今天不下雨，就页面输出，我们要出去敲代码
+        */
+
+        var rain = false; //rain存储的值为true表示下雨，false则表示不下雨
+        if (rain) { //此处小括号中存储boolean类型的值
+            document.writeln("我们待在教室敲代码");
+        } else {
+            document.writeln("我们出去敲代码");
+        }
+
+        //还可以用表达式来表示boolean类型的值
+        var b = 10 < 9;
+        if (b) {
+            document.writeln("真命题");
+        } else {
+            document.writeln("假命题");
+        }
+
+        //类型的转换 非boolean转换为boolean
+        document.writeln(Boolean(0));
+        document.writeln(Boolean(""));
+        document.writeln(Boolean(undefined));
+        document.writeln(Boolean(null));
+        document.writeln(Boolean(NaN));
+
+        /*
+        1 常用运算符
+
+        运算符号按照特定的规则把变量连接成表达式
+        1 算术运算符
+        + - * / % ++ --
+        */
+       document.writeln("123"-1);//此处会发生自动类型转换，此处转换使用的是Number()
+
+       document.writeln(12%5);
+
+       var i = 1;
+       i++;//i=i+1
+       document.writeln(i);
+       /*
+        注意：++的书写有两种格式
+        i++ 或者 ++i
+       */
+      ++i;
+      document.writeln(i);
+      /*
+        但是，如果++的同时进行其他的操作，就会有区别
+      */
+      var m = 1;
+      var n = m++;
+      var p = 1;
+      var q = ++p;
+
+      document.writeln(m);//2
+      document.writeln(n);//1
+      document.writeln(p);//2
+      document.writeln(q);//2
+
+      var a=1;
+      document.writeln(a++);//1
+      document.writeln(++a);//3
+      /*
+        2 赋值操作符
+        =
+        += -= *= /= %=
+      */
+        var num = 10;
+        num +=10;//num =num+10
+        document.writeln(num);
+        var str = "hello";
+        str += "world";
+        document.writeln(str);
+        /*
+        3 关系操作符
+        > < >= <= == === != !==
+        ++  判断是否相等，只比较数据值是否相等
+        === 判断是否相等，同时比较值和类型是否都相等
+        !=  不相等，只比较值是否不相等
+        !== 不相等，比较值和类型是否有一个不相等
+        */
+
+        document.writeln("1" == 1);
+        document.writeln("1" === 1);
+        //如果比较操作符的两边都是字符串，则默认会把第一个字符串进行比较
+        document.writeln("12">"5");//false
+        document.writeln(9>"51");//false
+        document.writeln(null==undefined);//true
+        //只要是NaN和任何值都不相等
+        document.writeln(("中国"-1) == ("中国"-2));//false
+
+        /*
+        4 三元操作符
+        语法
+        条件?执行代码1:执行代码2
+        如果条件为true，则执行代码1，否则执行代码2
+        */
+
+        /*
+        5 逻辑操作符
+        &&  与  找false的过程
+        ||  或  找true的过程
+        !   非
+        */
+       document.writeln("str" && 30 && 0);//0
+
+       //短路现象
+       var x = 1;
+       var flag = x>1 && x++;
+       //var flag = x==1 && x++;
+       document.writeln(x);
+    </script>
+</body>
+
+</html>

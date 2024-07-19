@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //let a,var a,const a
+        // 学号，成绩，姓名
+        let sno;
+        let grade;
+        let name;
+        // 一个班的成绩，姓名，学号
+        // 数组的定义
+        let arr = new Array();//Array是Js中的关键字
+        //数组中的每个元素访问语法，数组名[下标]
+        arr[0] = 98;    //给数组中的元素赋值
+        arr[1] = 99;    
+        console.log(arr);
+        // 第二种定义
+        let arr2 = [];
+        console.log(arr2);
+        //随机 10 个    100~200之间的整数存入数组中，并打印出来
+        //  求出最大值打印出来
+        var arr3 = [];
+        for(i = 0;i<10;i++){
+            arr3[i] = parseInt(Math.random()*101) + 100
+        }
+        console.log(arr3)
+        var sum = arr3[0];
+        for(i=1;i<arr3.length;i++){
+            if(arr3[i]>sum){
+                sum = arr3[i];
+            }
+        }
+        console.log("最大值是：",sum);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

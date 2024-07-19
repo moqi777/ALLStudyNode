@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易计算器</title>
+    <script>
+        function cal(){
+            // op = document.querySelector("#oper");
+            // result = document.querySelector("#result");
+            switch(oper.value){
+                case "+":
+                    result.innerText = parseInt(number1.value) + parseInt(number2.value)
+                    break;
+                case "-":
+                      result.innerText = parseInt(number1.value) - parseInt(number2.value)
+                    break;
+                case "*":
+                     result.innerText = parseInt(number1.value) * parseInt(number2.value)
+                    break;
+                case "/":
+                     result.innerText = parseInt(number1.value) / parseInt(number2.value)
+                    break;
+                default:
+                    alert("错误的运算符");
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="number1" placeholder="输入第一个数字">
+    <select name="oper" id="oper">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="number" id="number2" placeholder="输入第二个数字">
+    <input type="button" value="Calculate" onclick="cal()">
+    <p id="result"></p>
+</body>
+</html>

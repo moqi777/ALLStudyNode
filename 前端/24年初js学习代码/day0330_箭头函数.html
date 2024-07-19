@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- html代码是从上往下执行的，所以js代码要放到后面去 -->
+    <button id="btn">点我</button>
+    <script>
+        //匿名函数
+        document.querySelector("#btn").onclick=function(){
+            //alert("我被点击了");
+        }
+
+        document.querySelector("#btn").onclick=() => {
+            alert("我被点击了2");
+        }
+
+        //定义加法函数
+        function add(num1,num2){
+            return num1 + num2;
+        }
+        let add2 = function(num1,num2){
+            return num1 + num2;
+        }
+        let add3 = (num1=3,num2=5) => {//两个参数以上一定要加括号，可以给默认值
+            return num1 + num2;
+        }
+        let add4 = () =>{//无参必须括号
+
+        }
+        let add5 = x =>{
+
+        }
+        alert(add3());
+    </script>
+</body>
+</html>

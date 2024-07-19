@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生信息表</title>
+    <link rel="stylesheet" href="day0420_学生信息完整版本.css">
+    <script src="day0420_学生信息完整版本.js"></script>
+</head>
+<body>
+    <h2>学生信息表<button id="showPopupBtn">增加数据</button>
+        <input type="text" id="keyword" placeholder="请输入需要查询的姓名">
+        <button onclick="searchOrRed()">查询</button>
+        <button onclick="clearAll()">清除所有数据</button>
+    </h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tbd">
+            <!-- <tr>
+                <td >1</td>
+                <td contenteditable>草丛盖伦</td>
+                <td contenteditable>20</td>
+                <td><button>保存</button>
+                    <button>删除</button></td>
+            </tr>
+            <tr>
+                <td >2</td>
+                <td contenteditable>草丛盖伦</td>
+                <td contenteditable>21</td>
+                <td><button>保存</button>
+                    <button>删除</button></td>
+            </tr>
+            <tr>
+                <td >3</td>
+                <td contenteditable>草丛盖伦</td>
+                <td contenteditable>22</td>
+                <td><button>保存</button>
+                    <button>删除</button></td>
+            </tr> -->
+            
+        </tbody>
+    </table>
+
+    <div id="overdiv"></div>
+    <div id="popup">
+        <table border="0" class="addtb">
+            <tr>
+                <td>学号:</td>
+                <td><input type="text" id="sno"/>
+                <button onclick="genSno1()">AI生成</button>
+                </td>
+            </tr>
+            <tr>
+                <td>姓名:</td>
+                <td align="left"><input type="text" id="name"/></td>
+            </tr>
+            <tr>
+                <td>年龄:</td>
+                <td align="left"><input type="text" id="age"/></td>
+            </tr>
+        </table>
+    
+    
+      <button id="save" onclick="save()">保存</button>
+      <button id="quit" onclick="quit()">取消</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        定义一个可以存放十个元素的数组
+        并且给数组元素赋值十个随机数
+        找到这十个随机数中最大的值，并且打印到页面中
+        */
+        var array = new Array(10);
+        for(var i=0;i<array.length;i++){
+            array[i] = parseInt(Math.random()*101);
+        }
+        document.writeln(array);
+        var max = array[0];
+        for(var i=1;i<array.length;i++){
+            if(max<array[i]){
+                max = array[i]
+            }
+        }
+        document.writeln("<br/>")
+        document.writeln(max)
+
+        //把最大值找到，且放到数组最后的位置
+        for(var i=1;i<array.length;i++){
+            if(array[i]<array[i-1]){
+                var sum =array[i]
+                array[i] = array[i-1]
+                array[i-1] = sum
+            }
+        }
+        document.writeln("<br/>")
+        document.writeln(array)
+        //冒泡排序（外层循环N-1，内层循环N-i-1）
+        for (var i=0;i<array.length-1;i++){
+            for(var j=0;j<array.length-i-1;j++){
+                if(array[j+1]<array[j]){
+                    var sum =array[j]
+                    array[j]=array[j+1]
+                    array[j+1]=sum
+                }
+            }
+        }
+        document.writeln("<br/>")
+        document.writeln(array)
+    </script>
+</body>
+</html>

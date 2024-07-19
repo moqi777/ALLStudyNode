@@ -105,3 +105,62 @@ conn.close();
 - 传递字符串参数 需要两端拼接单引号
 - sql注入的问题
 - 拼接多个参数的时候 特别繁琐
+
+## 5. sql注入 --- 高频面试题
+
+sql注入：一般前端可以传递一些非法参数，通过字符串拼接的方式 处理sql语句 执行时 可能执行结果不是按照预期执行 最终达到欺骗服务器的目的
+
+比如：delete from 表 where name="用户名" or 1=1;	这里 or 1=1 就是非法参数 结果name条件可能不成立 但是1=1永远成立 最后会造成全表数据删除
+
+#### 5.1 解决方案
+
+使用预编译对象 PreparedStatement 来解决sql注入的问题，它会先编译sql语句 把sql语句结构固定，sql语句参数通过`?`作为占位符，同时还可以实现一次编译多次运行 执行效率会高一些
+
+```java
+Class.forName(driver);
+Connection conn = DriverManager.getConnection(url, username, password);
+//创建预编译对象 先编译sql 后运行 参数通过?来占位
+String sql ="delete from user where name=?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+//执行语句之前 处理一下问号 给问号赋值
+//pstmt.set类型(整数：第几个问号,数据)
+pstmt.setString(1,name);
+pstmt.executeUpdate();
+//关闭资源
+pstmt.close();
+conn.close();
+```
+
+`结合批处理代码实现`
+
+```java
+Class.forName(driver);
+Connection conn= DriverManager.getConnection(url,username,password);
+String sql="insert into myUser values(null,?,?,?,?)";
+PreparedStatement pstmt=conn.prepareStatement(sql);
+List<MyUser> list=getUsers();//调用一个方法 返回对象集合100个
+for(MyUser u:list) {
+    //给?赋值  一定要和上面定义的sql 一一对应
+    pstmt.setString(1,u.getName());
+    pstmt.setDate(2,new java.sql.Date(u.getTime().getTime()));
+    pstmt.setInt(3,u.getCard());
+    pstmt.setString(4,u.getSex());
+    pstmt.addBatch();//执行该条语句add同时上面四行数据清空
+}
+//执行批处理(一口气执行里面保存的所有sql语句)
+pstmt.executeBatch();
+pstmt.close();
+conn.close();
+```
+
+#### 5.2 preparedStatement和Statement区别
+
+- Statement：
+  - 是通过字符串拼接的方式处理参数
+  - 会存在sql注入的隐患，非常不安全 不推荐使用。
+  - 也是mybatis框架底层`${}`实现方式
+- PreparedStatement：属于Statement子类，是`预编译`对象 
+  - 先编译sql语句 多次运行 执行效率会高于Statement 
+  - 是采用`?`作为占位符形式处理参数 可以防止sql注入隐患 比较安全 推荐使用。
+  - 也是mybatis框架底层`#{}`实现方式
+

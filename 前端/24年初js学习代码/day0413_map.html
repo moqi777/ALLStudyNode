@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fun1(){
+            let nums = [2,4,6,8,7];
+        let newNums = [];
+        for(let i=0;i<nums.length;i++){
+            newNums.push(nums[i]*2);
+        }
+        console.log(newNums);
+        //遍历原数组的内容，遍历的当前元素值赋值给val
+        newNums = nums.map(function(val){
+            return val*3;
+        })
+        console.log(newNums);
+        //箭头函数
+        newNums = nums.map(val => {
+            return val*4;
+        })
+        console.log(newNums);
+        }
+
+        //精简语法
+        let fun2 = ()=>{
+            let nums = [2,4,6,8,7];
+            newNums = nums.map(n => n*3);
+            console.log(newNums);
+        }
+        let fun3 = () =>{
+            let chars = ["a","b","c","d"];
+            let newNums = chars.map((val,index) => val+index);
+            console.log(newNums);
+        }
+
+        //封装一个对象，里面包含基本类型变量和函数(注意不能使用箭头函数)
+        let app = {
+            mult:3,
+            three:function(v){
+                return this.mult*v;
+            }
+        }
+        //使用第二个参数的时候，不能使用箭头函数(综上总结，箭头函数中无法使用this)
+        let fun4 = () => {
+            let nums = [2,4,6,8,7];
+            let newNums = nums.map(function(n){
+                return this.three(n)    //this就是app
+            },app)
+            console.log(newNums);
+        }
+
+        fun1();
+        fun2();
+        fun3();
+        fun4();
+    </script>
+</body>
+</html>

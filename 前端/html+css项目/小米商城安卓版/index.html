@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<script src="https://at.alicdn.com/t/c/font_4306080_rc7ydcn2y1.js"></script>
+		<style>
+			.header {
+				width: 100%;
+				height: 90px;
+			}
+
+			.h1 {
+				width: 100%;
+				height: 60px;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+
+			.h1 .s1,
+			.s3 {
+				width: 60px;
+				height: 45px;
+			}
+
+			.h1 form {
+				width: 60%;
+				height: 50px;
+				display: flex;
+				justify-content: center;
+				position: relative;
+			}
+
+			.h1 input {
+				width: 100%;
+				height: 50px;
+				border-radius: 10px;
+				font-size: 18px;
+				padding-left: 50px;
+			}
+
+			.h1 .s2 {
+				width: 40px;
+				height: 30px;
+				position: absolute;
+				top: 15px;
+				left: 5px;
+			}
+
+			.h1>button {
+				border: 0px;
+				background-color: rgba(255, 255, 255, 0.5);
+			}
+
+			.h2 ul {
+				height: 30px;
+				margin: 0px;
+				padding: 0px;
+				display: flex;
+				justify-content: space-around;
+				list-style: none;
+				align-items: center;
+			}
+
+			a {
+				text-decoration: none;
+				color: #A2A1A1;
+			}
+			
+			.h2 ul li a:active{
+				border-bottom: 3px solid red;
+			}
+
+			.swiper {
+				width: 100%;
+				height: 300px;
+/* 				background-image: url(./img/t1.png);
+				background-size: 100% 100%; */
+			}
+
+			.product {
+				width: 100%;
+				height: 180px;
+			}
+
+			.product>div {
+				width: 100%;
+				height: 90px;
+				display: flex;
+				justify-content: space-around;
+			}
+
+			.product>div>div {
+				width: 100px;
+				height: 90px;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+			}
+
+			.product svg {
+				width: 40px;
+				height: 30px;
+				padding-top: 20px;
+				padding-bottom: 5px;
+			}
+
+			.show {
+				width: 100%;
+				height: 600px;
+				display: flex;
+				flex-direction: column;
+				flex-wrap: wrap;
+			}
+
+			.show .img1 {
+				width: 50%;
+				height: 600px;
+				background-image: url(./img/1.webp);
+				background-size: 100% 100%;
+			}
+
+			.show .img2 {
+				width: 50%;
+				height: 300px;
+				background-image: url(./img/2.webp);
+				background-size: 100% 100%;
+			}
+
+			.show .img3 {
+				width: 50%;
+				height: 300px;
+				background-image: url(./img/3.webp);
+				background-size: 100% 100%;
+			}
+
+			.nav {
+				width: 100%;
+				height: 90px;
+				outline: 1px solid #E4E4E4;
+				display: flex;
+				justify-content: space-around;
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+				z-index: 999;
+				background-color: #F3F3F3;
+			}
+
+			.nav>div {
+				width: 100px;
+				height: 90px;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+			}
+
+			.nav svg {
+				width: 40px;
+				height: 30px;
+				padding-top: 20px;
+				padding-bottom: 5px;
+			}
+
+			.fill {
+				width: 100%;
+				height: 90px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 头部导航 -->
+		<div class="header">
+			<div class="h1">
+				<div>
+					<svg class="s1">
+						<use xlink:href="#icon-xiaoxi-copy"></use>
+					</svg>
+				</div>
+				<form action="">
+					<svg class="s2">
+						<use xlink:href="#icon-sousuokuang"></use>
+					</svg>
+					<input type="text">
+				</form>
+				<button>
+					<svg class="s3">
+						<use xlink:href="#icon-saoma"></use>
+					</svg>
+				</button>
+			</div>
+			<div class="h2">
+				<ul>
+					<li><a href="">手机1</a></li>
+					<li><a href="">手机2</a></li>
+					<li><a href="">手机3</a></li>
+					<li><a href="">手机4</a></li>
+					<li><a href="">手机5</a></li>
+					<li><a href="">手机6</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- ；轮播 -->
+		<div class="swiper">
+			<!-- 图片 -->
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style=" background-image: url(./img/t1.png);background-size: 100% 100%;"></div>
+				<div class="swiper-slide" style=" background-image: url(./img/t2.png);background-size: 100% 100%;"></div>
+				<div class="swiper-slide" style=" background-image: url(./img/t3.png);background-size: 100% 100%;"></div>
+			</div>
+			<!-- 按钮 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		
+		<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.css"/><!-- swiper的css地址 -->
+		<script src="https://unpkg.com/swiper@8/swiper-bundle.js"></script><!-- swiper的js地址 -->
+		<script src="./js/store.js"></script><!-- 调用本地轮播代码 -->
+		
+		<!-- 产品区 -->
+		<div class="product">
+			<div class="line1">
+				<div class="d1">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-huangguan"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">新品秒杀</a></div>
+				</div>
+				<div class="d2">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-login_phone"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">小米众筹</a></div>
+				</div>
+				<div class="d3">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-shouji"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">全新超越</a></div>
+				</div>
+				<div class="d4">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-xinjianshijiandanshuaxin"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">以旧换新</a></div>
+				</div>
+				<div class="d5">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-dianshi"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">电视热卖</a></div>
+				</div>
+			</div>
+			<div class="line2">
+				<div class="d1">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-xuanze"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">小米秒杀</a></div>
+				</div>
+				<div class="d2">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-pintuan"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">1分拼团</a></div>
+				</div>
+				<div class="d3">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-xingqiu"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">小米5G</a></div>
+				</div>
+				<div class="d4">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-xiyiji"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">洗衣机热卖</a></div>
+				</div>
+				<div class="d5">
+					<div class="up">
+						<svg>
+							<use xlink:href="#icon-bijiben"></use>
+						</svg>
+					</div>
+					<div class="un"><a href="">笔记本热卖</a></div>
+				</div>
+			</div>
+		</div>
+		<!-- 信息展示区 -->
+		<div class="show">
+			<div class="img1"></div>
+			<div class="img2"></div>
+			<div class="img3"></div>
+		</div>
+		<!-- 底部导航	 -->
+		<div class="nav">
+			<div class="d1">
+				<div class="up">
+					<svg>
+						<use xlink:href="#icon-fangzi"></use>
+					</svg>
+				</div>
+				<div class="un"><a href="">主页</a></div>
+			</div>
+			<div class="d2">
+				<div class="up">
+					<svg>
+						<use xlink:href="#icon-fenxiang"></use>
+					</svg>
+				</div>
+				<div class="un"><a href="">分享</a></div>
+			</div>
+			<div class="d3">
+				<div class="up">
+					<svg>
+						<use xlink:href="#icon-xingqiu1"></use>
+					</svg>
+				</div>
+				<div class="un"><a href="">米圈</a></div>
+			</div>
+			<div class="d4">
+				<div class="up">
+					<svg>
+						<use xlink:href="#icon-gouwuche"></use>
+					</svg>
+				</div>
+				<div class="un"><a href="">购物车</a></div>
+			</div>
+			<div class="d5">
+				<div class="up">
+					<svg>
+						<use xlink:href="#icon-wode"></use>
+					</svg>
+				</div>
+				<div class="un"><a href="">我的</a></div>
+			</div>
+		</div>
+		<!-- 用于底部填充在底部导航下面 -->
+		<div class="fill"></div>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+      
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+      
+        th {
+            background-color: #f2f2f2;
+        }
+      
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+      </style>
+</head>
+<body>
+    <table style="width:500px;">
+        <thead>
+          <tr>
+              <th>序号</th>
+              <th>名字</th>   
+              <th>操作</th> 
+          </tr>
+      </thead>
+      <tbody id="td">
+          <tr>
+              <td contenteditable>1</td>
+              <td contenteditable></td>
+              <td><button onclick="save(this)">保存</button>
+                <button onclick="get(this)">获取</button>
+            </td>
+          </tr>
+          
+          </tbody>
+        </table>
+
+        <script>
+            let save = (obj) => {
+                td = obj.parentElement; //得到父级元素
+                //previousElementSibling 前一个兄弟节点
+                nametd = td.previousElementSibling;//
+                numtd = nametd.previousElementSibling;//得到序号TD
+                let js = [numtd.innerHTML, nametd.innerHTML];
+                localStorage.setItem("a", JSON.stringify(js));
+            }
+            let get = (obj) => {
+                alert(localStorage.getItem("a"));
+            }
+        </script>
+</body>
+</html>

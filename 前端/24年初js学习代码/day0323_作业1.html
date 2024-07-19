@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 封装一个函数，随机n个a-z中的字符
+        function random_letter(n){
+            arr_letter = []
+            //随机一个字母
+            for(i=0;i<n;i++){
+                arr_letter[i] = String.fromCharCode(parseInt(Math.random()*26)+97)
+            }
+            return arr_letter
+        }
+        console.log(random_letter(1000));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

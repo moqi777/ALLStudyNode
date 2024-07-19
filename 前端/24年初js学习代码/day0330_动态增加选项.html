@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function add(){
+            let ul = document.querySelector("#ul");//得到ul标签
+            len = ul.getElementsByTagName("li").length;//根据标签名查找标签对，查找的是获取到的ul标签对下面的li的数量
+            let t = String.fromCharCode(65 + len);
+            let html = `<li><input type="radio" name="cho">${t}</input></li>`;
+            document.querySelector("#ul").innerHTML += html;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="add()">增加选项</button>
+    <h1>选项</h1>
+    <ul id="ul">
+        <li><input type="radio" name="cho">A</li>
+        <li><input type="radio" name="cho">B</li>
+    </ul>
+</body>
+</html>

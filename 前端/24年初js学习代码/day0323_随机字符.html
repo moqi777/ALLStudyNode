@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 随机100个a-z的字符
+        var arr = [];
+        for(i = 0;i<100;i++){
+            // String.fromCharCode  把整数转变为对应的字符
+            arr[i] = String.fromCharCode(parseInt(Math.random()*26 + 97));
+        }
+        document.write(arr);
+        document.write(String.fromCharCode(37073));
+        // charCodeAt()  把字符转变为对应的整数，参数为需要转换的字符串中字符下标
+        document.write("郑".charCodeAt(0),"<br/>");
+        document.write("中国人民".charCodeAt(3));
+
+        //随机1000个 a-z的字符，统计m出现的次数
+        var arr1 = [];
+        let m =0;
+        for(i = 0;i<1000;i++){
+            arr1[i] = String.fromCharCode(parseInt(Math.random()*26 + 97));
+            if(arr1[i]=="m"){
+                m++;
+            }
+        }
+        console.log(arr1);
+        document.write("m出现的次数是："+m);
+
+        // 随机1000个a-z的字符，统计每个字符出现的次数，并打印出来
+        let times = [];//数组用来存储每个字符出现的次数
+        document.write("<h1>"+times[0]+"</h1>");
+        for(i = 0;i<1000;i++){
+            c = parseInt(Math.random()*26) + 97;
+            //数组内元素是空的时候无法++，所以需要在第一次的时候手动赋1
+            if(times[c-97]){
+                times[c-97]++;
+            }else{
+                times[c-97] = 1;
+            }
+        }
+        console.log(times);
+        for(i = 0;i<times.length;i++){
+            document.write(String.fromCharCode(97+i)+":"+times[i]+"次<br/>");
+        }
+        document.write("<br/>*******************<br/>")
+        times.forEach((v,i)=>{
+            document.write(String.fromCharCode(97+i)+":"+v+"<br/>")
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

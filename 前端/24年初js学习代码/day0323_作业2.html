@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 封装函数：求某个字符串中某个字符出现的次数
+        function char_count(str,n){
+            count = 0;
+            for (i = 0; i < str.length; i++) {
+                if(str[i]==n){
+                    count++;
+                }
+            }
+            return count;
+        }
+        str = "iaugfiqebfiwgvibwekhdfqwuhfihwbevkehfiuhweiubcviauiqehfiuwehi"
+        console.log(char_count(str,'q'));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

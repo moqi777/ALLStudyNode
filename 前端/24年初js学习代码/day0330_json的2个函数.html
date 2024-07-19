@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+        浏览器本地存储数据，只能存储字符串类型
+        JSON.stringify();   把对象转为json字符串
+        JSON.parse();       把json字符串解析转换为js对象(数组，set，类)
+        typeof(变量)        返回变量的类型
+        */
+       //数组得到转换
+       function exp1(){
+        let arr = [1,2,3,"ab","xy"];
+        console.log(arr,typeof(arr));
+        //转换为json字符串
+        let str = JSON.stringify(arr);
+        console.log(str,typeof(str));
+        //把json字符串转为 对象
+        let str2 = JSON.parse(str);
+        console.log(str2,typeof(str2));
+       }
+       exp1();  
+       function save(){
+        let arr = [1,2,3,"ab","xy"];
+        //把数据保存到浏览器本地储存中
+        //localStorage存储的永久数据在打开页面后的开发者工具中查看到(开发者工具中Application->Storage->Local Storage)
+        localStorage.setItem("a",arr);
+       }
+       function get(){
+        // 根据名字取出浏览器本地储存中的数据
+        let a = localStorage.getItem("a");
+        dv.innerHTML = a;
+       }
+       function save1(){
+        let cons = new Set(["中国","美国","额罗素",18,25,63]);
+        //先吧set转Wie数组，set.values()：返回set的所有元素
+        arr = Array.from(cons.values());//将set转为数组
+        localStorage.setItem("c",arr);
+       }
+       function get1(){
+        dv.innerHTML = localStorage.getItem("c");
+       }
+    </script>
+</head>
+<body>
+    <button onclick="save1()">保存数据到浏览器中</button>
+    <br>
+    <button onclick="get1()">取出浏览器中的数据</button>
+    <div id="dv"></div>
+</body>
+</html>

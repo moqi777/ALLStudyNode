@@ -1,0 +1,6 @@
+# 忽略IDE配置文件
+.vscode/
+.idea/
+
+# 忽略Node.js的依赖目录
+node_modules/

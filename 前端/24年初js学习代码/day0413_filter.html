@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //普通方法过滤奇数
+        let fun1 = () =>{
+            let nums = [2,4,7,5,8,10];
+            let newNums = [];
+            nums.forEach(n => {
+                if(n%2==0){
+                    newNums.push(n);
+                }
+            })
+            console.log(newNums);
+        }
+
+        //filter过滤奇数
+        let fun2 =() =>{
+            let nums = [2,4,7,5,8,10];
+            let newNums = nums.filter(n => n%2==0);
+            //等同于
+            // newNums = nums.filter(n=>{
+            //     return n%2 == 0;
+            // })
+            console.log(newNums);
+        }
+
+        //链式调用
+        let fun3 = () =>{
+            let nums = [2,4,7,5,8,10];
+            let newNums = nums.filter(n => n%2 != 0).map(n => n*3);
+            console.log(newNums);
+        }
+        fun1();
+        fun2();
+        fun3();
+    </script>
+</body>
+</html>

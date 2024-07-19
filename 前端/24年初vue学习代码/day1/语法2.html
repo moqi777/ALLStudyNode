@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue3.245.js"></script>
+</head>
+<body>
+    <div id="dv">
+        {{message}}
+        <br>
+        <span v-show="show">{{message}}</span><br>
+        <span>最新num值:{{num}}</span><br>
+        <span v-once>初始值：{{num}}</span><br>
+        <button @click="num++">按钮</button>
+        <br>
+        <h1>{{degree}}</h1>
+        <h3 v-if="degree>=90">优秀</h3>
+        <h4 v-else-if="degree >= 80">良好</h4>
+        <h6 v-else>再接再厉</h6>
+
+        <br>
+        <ul>
+            <template v-for="cn,index in countries">
+                <li v-if="cn.status == 0">
+                    友好国家：{{index}},{{cn.name}},{{cn.ename}},{{cn.status}}
+                </li>
+                <li v-else>
+                    敌对国家：{{index}},{{cn.name}},{{cn.ename}},{{cn.status}}
+                </li>
+            </template>
+        </ul>
+    </div>
+    <script>
+        const app = {
+            data(){
+                return{
+                    message:"明天",
+                    show:false,
+                    degree:parseInt(Math.random()*41) + 60,
+                    num:1,
+                    countries:[
+                        {name:"中国",ename:"cn",status:0},
+                        {name:"美国",ename:"usa",status:1},
+                        {name:"俄罗斯",ename:"rus",status:0}
+                    ]
+                }
+            },
+            methods:{
+
+            }
+        }
+        Vue.createApp(app).mount("#dv");
+    </script>
+</body>
+</html>

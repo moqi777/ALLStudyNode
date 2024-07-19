@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let count = 10;
+        let name = "今天天气真好";
+        // 使用模版字符串
+        let html = `<h1>${name},${count}</h1>`;
+        document.write(html);
+        document.write("<h1>"+name+count+"</h1>");
+
+        function gen(){
+            let html ="";
+            const bigFactory = ["淘宝","京东","腾讯"];
+            //for-in遍历出来的是下标，for-of遍历出来的是值
+            for(const x of bigFactory){
+                html += "<li>";
+                html += x;
+                html += "</li>"
+            }
+            console.log(html);
+            // 根据选择器 查找标签对象  innerHTML:任意标签里的html
+            document.querySelector("#ul").innerHTML = html;
+        }
+        function gen2(){
+            let html ="";
+            const bigFactory = ["淘宝","京东","腾讯"];
+            bigFactory.forEach(function(x){
+                html += "<li style='color:red'>";
+                html += x;
+                html += "</li>";
+            })
+            html = "";
+            bigFactory.forEach(x =>{
+                html += `<li style ="color:blue">${x}</li>`;//反引号
+            })
+            document.querySelector("#ul").innerHTML = html;
+        }
+    </script>
+</head>
+<body>
+    <h1><button onclick="gen()">生成</button></h1>
+    <h1><button onclick="gen2()">生成2</button></h1>
+    <ul id="ul">
+        
+    </ul>
+</body>
+</html>

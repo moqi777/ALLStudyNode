@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //js数组
+        let arr = [1,2,3,3];
+        console.log(arr);
+        /*
+        set 集合，类似与数组的可以存储多个数据的数据结构
+        */
+       let set = new Set([1,2,3,3,3]);//用数组构造set数组
+       console.log(set);
+       set = new Set();//空set集合
+       set.add(1);
+       set.add(2);
+       set.add(3);
+       set.add(3);
+       set.add("hello");
+       console.log(set);
+       set.forEach(x =>{
+        document.write(`${x}<br/>`);
+       })
+       document.write("************<br/>");
+
+       set.delete(3);//删除内容为3的元素
+       set.forEach(x =>{
+        document.write(`${x}<br/>`);
+       })
+       document.write("************<br/>");
+       document.write("大小个数为："+set.size+"<br/>");
+       console.log(set.has(2));//返回true，判断有没有这个元素
+       //清空
+       set.clear();
+       document.write("************<br/>");
+       document.write("大小个数为："+set.size+"<br/>");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
