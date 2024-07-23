@@ -282,10 +282,12 @@ public class DBUtil {
     //存在两个问题：
     // 1：返回的是ResultSet 需要用户自己封装数据
     // 2：查询的方法不能关闭资源 因为用户还需要处理结果集 处理完之后才可以关闭
+    public static Connection conn;
+    public static PreparedStatement pstmt;
     public static ResultSet select(String sql, Object... o){
-        Connection conn = getConn();
+        conn = getConn();
         try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             if (o!=null){//是否有参数
                 for (int i = 0; i < o.length; i++) {
                     pstmt.setObject(i+1,o[i]);
@@ -296,6 +298,103 @@ public class DBUtil {
             e.printStackTrace();
             return null;
         }
+    }
+}
+```
+
+## 7. JDBC如何做事务 ---面试题
+
+jdbc做事务类似于mysql数据库，都是自动提交事务，如果想自己实现事务，需要设置手动提交`setAutoCommit(boolen)` 通过Connection对象调用commit()和rollback()
+
+- conn.setAutoCommit(boolen);
+- conn.commit();
+- conn.rollback();
+
+## 8. ThreadLocal ---面试题
+
+ThreadLocal是java中一个特殊的类，用于在多线程中去维护线程的变量，一般情况下如果多线程共享同一个变量，会引发并发问题，但是ThreadLocal为每一个线程提供了一个独立的变量副本，每个线程都可以独立修改这个副本，所以这里面保存的数据不会产生并发问题 适合在多线程情况下共享资源时使用 比如：存储数据库连接(每个用户只需要一个连接 每个用户对应不能相互影响)，session会话管理技术 等场景		常用方法：
+
+- set()：设置当前变量副本
+- get()：获取当前变量副本
+- remove()：清除当前线程的变量副本
+
+`原先的工具类使用事务但是并不会生效`
+
+```sql
+//通过事务如何实现多个操作同时成功和失败
+Connection conn = DBUtil.getConn();
+conn.setAutoCommit(false);//手动提交
+try {
+    DBUtil.update("insert into dept values(?,?,?)",204,"张三","江西");
+    int i=10/0;
+    DBUtil.update("insert into dept values(?,?,?)",104,"李四","武汉");
+    conn.commit();
+} catch (SQLException e) {
+    conn.rollback();
+}
+/*
+理想效果是因为抛出异常事务回滚
+但是结果是第一条sql语句生效了，然后程序中断
+原因在于前两行调用的connection对象与后面两次update使用的并不是同一个连接对象
+所以即使设置了关闭自动提交也无法使用事务
+*/
+```
+
+`将工具类中的连接加入ThreadLocal，使得工具类支持事务，以下为修改的部分代码`
+
+```sql
+//修改1：定义一个本地线程 只存储连接对象 它和其他线程独享
+static ThreadLocal<Connection> tl=new ThreadLocal<>();
+//创建连接通用方法
+// 一个用户一个线程 只有一个连接 除非连接被回收了
+public static Connection getConn(){
+	//修改2：通过ThreadLocal的get方法获取其中保存的连接对象
+    Connection conn = tl.get();
+    try {
+        //修改3：第一次使用 获取新连接 存储到本地线程
+        if (conn==null){
+            conn = DriverManager.getConnection(url,username,password);
+            tl.set(conn);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return conn;
+}
+//关闭连接通用方法，通过传参的顺序 来控制关闭的顺序
+//关闭的时候 本地线程也要清空
+public static void close(AutoCloseable... able){
+	//修改4：在关闭方法中新增一个删除ThreadLocal
+    tl.remove();    
+    for (AutoCloseable a : able) {
+        if (a!=null) {
+            try {
+                a.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+//增删改通用方法
+//bug：sql语句占位符个数 一定要和后面参数o数组长度一致 顺序也得一致
+public static int update(String sql, Object ... o){
+    conn = getConn();
+    try {
+        pstmt = conn.prepareStatement(sql);
+        if (o!=null){//是否有参数
+            for (int i = 0; i < o.length; i++) {
+                pstmt.setObject(i+1,o[i]);
+            }
+        }
+        int i = pstmt.executeUpdate();
+        System.out.println("受影响的行数："+i);
+        //修改5：删除调用关闭方法，让使用者结束事务后自己关闭
+        //close(pstmt,conn);
+        return i;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return -1;
     }
 }
 ```
