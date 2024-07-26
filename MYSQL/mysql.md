@@ -1129,7 +1129,19 @@ order by name;
   - 更适用于需要频繁数据更新、插入操作
   - 支持外键
 
-## 22. MYSQL总结(所有面试题)
+## 22. drop truncate delete区别？ ---笔试题
+
+drop：可以删除整张表	属于DDL语言	事务是不可以回滚的	会释放空间	会删除定义
+
+truncate：截断表 就相当于把表清空	属于DDL语言	事务是不可以回滚的	会释放空间	不会删除定义
+
+delete：删除表中的数据	可以添加条件来控制	属于DML语言	可以进行事务	不会释放空间	不会删除定义
+
+速度：drop>truncate>delete
+
+注：truncate使用方式和delete一样 truncate form 表;
+
+## 23. MYSQL总结(所有面试题)
 
 > 1.关系型和非关系型区别？
 >
@@ -1180,3 +1192,5 @@ order by name;
 > 24.sql语句关键字的执行顺序？
 >
 > 25.MyISAM和InnoDB存储引擎的区别？
+>
+> 26.drop truncate delete区别？ ---笔试题
