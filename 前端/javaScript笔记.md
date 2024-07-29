@@ -337,6 +337,7 @@ document.writeln(Boolean(NaN));//false
 单行注释	//
 前台显示	alert("弹窗");
 后台显示	console.log('内容');
+确认取消弹出框		var boolean = confirm("提示信息");
 弹出输入框	var 变量接受输入内容 = prompt("弹窗输入提示");
 页面刷新	location.reload()
 ```
@@ -553,6 +554,18 @@ JSON.parse();
 	把json字符串解析转换为js对象(数组，set，类)
 ```
 
+### 正则用法
+
+```jsp
+//1.定义正则表达式（百度搜，前后记得加斜杠）
+let phoneReg = /^[A-Za-z0-9]+$/;
+//2.验证正则表达式
+if (!phoneReg.test(phone)){
+    error.innerText = "账号只能由字母和数字构成";
+    return false;
+}
+```
+
 # DOM
 
 > 概念：
@@ -739,6 +752,8 @@ A.replaceChild(newNode,oldNode);
 ##### 表单事件
 
 - onsubmit 确认按钮被点击。
+  - onsubmit="return function()"，表单提交后只有方法返回true才会提交，默认true，不写return只有一个function()就是正常的调用这个方法
+
 - onreset 重置按钮被点击。
 
 ### 事件的注册

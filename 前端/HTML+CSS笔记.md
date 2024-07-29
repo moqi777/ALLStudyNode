@@ -176,6 +176,7 @@ input标签属性
 | autocomplete | off                  | 使文本框不会显示下拉历史输入         |
 | placeholder  | 内容                 | 设置文本框内提示语，输入内容覆盖     |
 | readonly     | true                 | 元素设置为只读                       |
+| disabled     | /                    | 禁用标签，与readonly，但是不能提交   |
 | required     | /                    | 表单提交时必须填写                   |
 | autocomplete | on(默认值，允许) off | 设置输入框是否显示历史输入           |
 
