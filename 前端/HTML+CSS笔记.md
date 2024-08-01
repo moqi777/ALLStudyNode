@@ -203,6 +203,7 @@ input标签属性
 | time           | 时 分                                                        |
 | dataTime       | 年月日 时 分 自动选择网络时间                                |
 | dataTime-local | 年月日 时 分 自动选择本地时间                                |
+| hidden         | 设置为隐藏不可见                                             |
 
 select标签属性
 
