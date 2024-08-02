@@ -588,10 +588,15 @@ if (!phoneReg.test(phone)){
 > - 二是在js代码中获取Dom元素步骤写在window.onload（窗口加载完成后的事件）中
 
 ```js
+//页面刷新操作
 window.onload=()=>{
  	document.getElementByld();
     ...
 }
+//通过js重定向跳转地址
+window.location.href="/地址";
+//通过文件对象 获取地址 (不是真实地址 而是虚拟地址)
+let src = window.URL.createObjectURL(imgFile);
 ```
 
 #### 获取到Dom元素
@@ -621,11 +626,10 @@ window.onload=()=>{
 > 以下方法均是  **元素**  开头
 
 ~~~js
-.getAttrlbute("[属性名]");
+.getAttrbute("[属性名]");
 	获取到指定的属性值
-.setAttrilbute("[属性名]","[属性值]");
+.setAttribute("[属性名]","[属性值]");
 	给元素赋值
-    
 //三者区别：innerText用于获取和设置HTML元素的可见文本，只会包含文本内容没有HTML标签。适用于大多数HTML元素，如div,span,p	
 //innerHtml可以获取或设置元素的整个HTML内容，包括所有的HTML标签、子标签和文本
 //value用于获取或设置表单元素的值，主要用于输入相关的HTML元素，如input,textarea,select   
@@ -647,6 +651,9 @@ window.onload=()=>{
 	获取或设置html元素的class属性
     //document.getElementByld("id名").className;	返回类名
     //document.getElementByld("id名").className = "类名";	设置类名
+.files
+	从type="file"的input元素中获取到文件内容，是一个数组集合
+    //let imgFile = o.files[0];
 ~~~
 
 ## 节点
