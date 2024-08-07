@@ -135,3 +135,11 @@ jdbc:mysql://127.0.0.1:3306/sc240601?useUnicode=true&characterEncoding=utf-8&aut
 ![image.png](https://s2.loli.net/2024/07/24/inHq48huR1js7ta.png)
 
 ![image.png](https://s2.loli.net/2024/07/24/S8BvFEn4TKZp73Q.png)
+
+## 5.小蓝鸟mybatisX
+
+与lombok导入插件方式一样，搜索mybatisX就好
+
+作用：mybatis中映射文件的<insert>等标签就可以通过小蓝鸟与对应的接口了，点击可以跳转
+
+![image-20240807193853072](https://s2.loli.net/2024/08/07/WBgiJwbFxsK9dD7.png)
