@@ -13,7 +13,7 @@
 
 下载.exe文件安装，注意nvm和node的安装路径都不能有中文。
 
-可以在D盘下自动义位置创建一个NvmAndNode文件夹，用于存放安装时需要设置的nvm和nodeJs安装位置
+可以在D盘下自动义位置创建一个NvmAndNode文件夹(本机在D:\Program Files\NvmAndNode)，用于存放安装时需要设置的nvm和nodeJs安装位置
 
 #### 设置镜像下载地址
 
