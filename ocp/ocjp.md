@@ -60,3 +60,9 @@ public void test(var a){}	//不支持
 public var test(){}  //不支持 	
 ```
 
+## 3. 集合新的API
+
+早期创建集合 通过new ArrayList(); add()存储数据
+在JDK9之后开始支持通过List.of()	Set.of()	创建集合添加元素
+缺点：是不可变集合
+
