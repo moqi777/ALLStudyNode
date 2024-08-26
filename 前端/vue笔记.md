@@ -1,4 +1,4 @@
-# Vue3
+# ·Vue3
 
 > 响应式 前端框架 [Vue.js官方文档](https://cn.vuejs.org/)
 
