@@ -214,6 +214,15 @@ chmod 731 文件或者目录(创建者都有 所属组有写入和执行 其他�
 
 #### 5.5 防火墙命令
 
+```
+语法：systemctil 关键字 firewalld
+systemctil restart firewalld ：开启防火墙
+systemctil stop firewalld ：关闭防火墙
+systemctil enable firewalld ：启用防火墙
+systemctil disable firewalld ：禁用防火墙
+systemctil status firewalld ：查看防火墙状态
+```
+
 
 
 ## 6. 部署tomcat服务器
@@ -245,7 +254,7 @@ windows ip地址:3306/sc
 
   - ./shutdown.sh 关闭服务器 只能在tomcat中使用
   - ps -ef | grep 程序 ：根据程序名去搜索进程 目的是为了找到进程id
-    kill -0 进程id         ：强制杀死指定进程 可以关闭任何程序
+    kill -9 进程id         ：强制杀死指定进程 可以关闭任何程序
 
 
 
@@ -263,13 +272,191 @@ windows ip地址:3306/sc
 
   - 通过maven将不报错的项目进程打包jar
 
-  ```
+  ```xml
   <configuration>
+  	<!--一定要和主类一致-->
       <mainClass>com.sv.springbootvue.SpringbootVueApplication</mainClass>
       <!--这个必须要注释 如果不注释 通过linux启动jar包项目 找不到主类-->
       <!--<skip>true</skip>-->
   </configuration>
   ```
-
+  
   - 通过Xftp工具传输jar包到linux(是可以随便放的 内置tomcat服务器)
-  - 启动项目，进入到所在目录下  java -jar jar包名称
+  - 启动项目，进入到所在目录下 
+  
+  ```sql
+   java -jar XXX.jar		(ctrl+c结束)
+   java -jar XXX.jar &	(ctrl+c进行后台运行)
+   -- 如果端口号被占用 可以不用修改jar包 也可以动态修改端口号
+   java -jar -Dserver.port=XXXX XXX.jar
+  ```
+  
+  
+
+## 7. 防火墙开发端口
+
+防火墙是系统的安全机制，项目上线运行时 一定会开启防火墙，但是开启防火墙后 其他计算机就无法正常访问Linux中的某个程序，所以需要针对某些特定程序开发指定的端口 再开防火墙
+
+- 找到Linux防火墙配置文件
+
+```
+vi /etc/firewalld/zones/public.xml
+```
+
+- 配置 防火墙开发端口
+
+```xml
+<!--开放一个端口 rule标签可以配置多个，写在</zone>根标签内部-->
+<rule family="ipv4">
+    <port protocol="tcp" port="9999"/>
+    <accept/>
+</rule>
+```
+
+- 重启防火墙 配置才生效
+
+```
+systemctl restart firewalld
+```
+
+## 8. Linux配置java环境变量
+
+- 下载jdk	可以在官网下载(*.tar.ge)，也可以通过命令下载
+- 通过Xftp 传输到linux中 如果是命令下载 就不用传递了
+- 安装jdk (解压即可)
+- 配置java环境变量 
+
+```sql
+vi /etc/profile 打开编辑环境变量文件
+-- 添加如下配置：
+-- 1.添加两个变量导出 JAVA_HOME 和 CLASSPATH
+export JAVA_HOME=Linux解压JDK目录
+export CLASSPATH=百度搜直接粘贴 和window几乎一样 但是Linux间隔符是冒号不是分号 斜杠
+	.:%JAVA_HOME%/lib/dt.jar:%JAVA_HOME%/lib/tools.jar
+	
+-- 2.追加PATH变量 添加一个配置 导出 $PATH和$JAVA_HOME调用定好的变量 间隔符是冒号
+export PATH=$PATH:$JAVA_HOME/bin
+
+-- 3.通过命令 source /etc/profile 刷新配置(否则不会生效)
+
+-- 4.测试 java -version	javac -version
+```
+
+## 9.Linux安装mysql
+
+#### 9.1 先保证linux是联网状态
+
+首先 需要网卡设置成桥接模式，Linux ip地址中的网关 改成和windows的网关一致 这样配置好后 windows有网的 Linux也可以联网
+
+```
+windows:
+IPv4 地址 . . . . . . . . . . . . : 192.168.9.246
+子网掩码  . . . . . . . . . . . . : 255.255.0.0
+默认网关. . . . . . . . . . . . . : 192.168.1.9
+
+linux：
+IPADDR=192.168.11.27
+NETMASK=255.255.0.0
+GATEWAY=192.168.1.26
+
+测试：是否联网
+ping www.baidu.com
+```
+
+#### 9.2 查看是否安装过mysql 卸载
+
+- 查看版本
+
+```sql
+-- mariadb是linux版本安装mysql的分支
+rpm -qa | grep mariadb
+-- 如果查出来这样的版本
+mariadb-libs-5.5.56-2.el7.x86_64
+```
+
+- 卸载
+
+```
+rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
+```
+
+- 再检查版本
+
+```
+rpm -qa | grep mariadb
+```
+
+#### 9.3 通过命令安全mysql
+
+- 下载并安装：yum 命令(需要联网)
+
+```sql
+yum install https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+
+-- 如果出现Is this ok [y/d/N]: y	输入y即可
+```
+
+- 安装mysql服务 
+
+```sql
+-- --nogpgcheck表示跳过GPG检查
+yum install -y mysql-server --nogpgcheck
+```
+
+- 通过命令启动mysql服务
+
+```
+systemctl start mysqld.service
+```
+
+- 查看mysql初始密码	格式：root@localhost:初始密码
+
+```sql
+cat /var/log/mysqld/log | grep localhost
+
+-- 会出现这个 
+2024-09-06T03:28:36.295253Z 1 [Note] A temporary password is generated for root@localhost: /jeLWJJdl9Sp
+```
+
+- 使用这个密码登录mysql服务 默认身份localhost
+
+```
+mysql -u root -p 回车 让你输入密码
+
+如果想访问远程的mysql数据库
+mysql -h ip地址 -u root -p 回车 让你输入密码
+```
+
+- 进入服务后 修改root账号密码 默认规则 要求特别严格必须有大写 小写 特殊字符和长度限制
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码';
+```
+
+- 如果想设置简单的密码 修改mysql 的密码策略
+
+```sql
+-- 查看密码策略
+SHOW variables LIKE 'validate_password%';
+
+-- 结果
++--------------------------------------+--------+
+| Variable_name                        | Value  |
++--------------------------------------+--------+
+| validate_password_check_user_name    | OFF    |
+| validate_password_dictionary_file    |        |
+| validate_password_length             | 8      |
+| validate_password_mixed_case_count   | 1      |
+| validate_password_number_count       | 1      |
+| validate_password_policy             | MEDIUM |
+| validate_password_special_char_count | 1      |
++--------------------------------------+--------+
+validate_password_length：密码最小长度
+validate_password_policy：修改密码策略
+-- 0 或者 Low		只会验证长度
+-- 1 或者 MEDIUM	验证长度 数字 大小写 特殊字符
+-- 2 或者 STRONG	验证长度 数字 大小写 特殊字符 字典
+set global validate_password_policy=0;
+set global validate_password_length=1;
+```
+
